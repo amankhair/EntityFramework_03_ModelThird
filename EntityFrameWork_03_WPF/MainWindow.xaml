@@ -1,0 +1,45 @@
+﻿<Window x:Class="EntityFrameWork_03_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EntityFrameWork_03_WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="Import">
+                <MenuItem Header="Import Excel" Click="MenuItem_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+        
+        <StackPanel  Grid.Row="1" Orientation="Horizontal">
+            <DatePicker Margin="3" x:Name="DatePickerStart"></DatePicker>
+            <DatePicker Margin="3" x:Name="DatePickerEnd"></DatePicker>
+            <ComboBox x:Name="GetTasksCombobox">
+                <ComboBoxItem Content="Task01"></ComboBoxItem>
+                <ComboBoxItem Content="Task02"></ComboBoxItem>
+                <ComboBoxItem Content="Task03"></ComboBoxItem>
+                <ComboBoxItem Content="Task04"></ComboBoxItem>
+                <ComboBoxItem Content="Task05"></ComboBoxItem>
+            </ComboBox>
+            <Button  HorizontalAlignment="Right" Content="Get Data" Margin="180,5,0,5" Click="Button_Click" ></Button>
+          
+        </StackPanel>
+        <ListView x:Name="DataListView" Grid.Row="2">
+            <ListView.View>
+                <GridView x:Name="DataGridView" >
+                    <GridView.Columns>
+                        
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

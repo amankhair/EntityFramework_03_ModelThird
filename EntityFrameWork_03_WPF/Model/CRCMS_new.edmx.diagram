@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="21eff03251be45a5b170aa4c54618fe3" Name="Diagram1">
+        <EntityTypeShape EntityType="CRCMS_newModel.Area" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRCMS_newModel.Document" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRCMS_newModel.Timer" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRCMS_newModel.TimerArchive" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRCMS_newModel.TimerInactivity" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRCMS_newModel.TimerInactivityArchive" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="CRCMS_newModel.FK_Timer_Area" ManuallyRouted="false" />
+        <AssociationConnector Association="CRCMS_newModel.FK_Timer_Document" ManuallyRouted="false" />
+        <AssociationConnector Association="CRCMS_newModel.FK_TimerArchive_Document" />
+        <AssociationConnector Association="CRCMS_newModel.FK_TimerInactivity_Document" />
+        <AssociationConnector Association="CRCMS_newModel.FK_TimerInactivityArchive_Document" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

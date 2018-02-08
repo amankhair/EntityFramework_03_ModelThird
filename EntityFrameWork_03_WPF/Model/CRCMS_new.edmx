@@ -1,0 +1,569 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CRCMS_newModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="AreaId" />
+          </Key>
+          <Property Name="AreaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeArea" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="NoSplit" Type="bit" />
+          <Property Name="AssemblyArea" Type="bit" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="500" />
+          <Property Name="MultipleOrders" Type="bit" />
+          <Property Name="HiddenArea" Type="bit" />
+          <Property Name="IP" Type="varchar" MaxLength="5000" />
+          <Property Name="PavilionId" Type="int" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="OrderExecution" Type="int" />
+          <Property Name="Dependence" Type="int" />
+          <Property Name="WorkingPeople" Type="int" />
+          <Property Name="ComponentTypeId" Type="int" />
+          <Property Name="GroupId" Type="int" />
+          <Property Name="Segment" Type="int" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+          </Key>
+          <Property Name="DocumentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="DocumentCreateDate" Type="datetime" />
+          <Property Name="DocumentCloseDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="DocumentTypeId" Type="int" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="ModelId" Type="int" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="ProducerId" Type="int" />
+          <Property Name="StockId" Type="int" />
+          <Property Name="MachinesSN" Type="nvarchar" MaxLength="50" />
+          <Property Name="HoursMachines" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="SmcsCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="ComponentSN" Type="nvarchar" MaxLength="50" />
+          <Property Name="ComponentDismantlingDate" Type="datetime" />
+          <Property Name="PartsCost" Type="money" />
+          <Property Name="WorkCost" Type="money" />
+          <Property Name="ConsumablesCost" Type="money" />
+          <Property Name="ApprovedServiceEngineer" Type="bit" />
+          <Property Name="EngineModelId" Type="int" />
+          <Property Name="ComponentHours" Type="money" />
+          <Property Name="RepairTypeId" Type="int" />
+          <Property Name="ArrivalMonth" Type="datetime" />
+          <Property Name="DispatchDate" Type="datetime" />
+          <Property Name="DeliveryMethodId" Type="int" />
+          <Property Name="ToPlan" Type="bit" />
+          <Property Name="CabinetSE" Type="int" />
+          <Property Name="IsArrived" Type="bit" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="StatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="Timer">
+          <Key>
+            <PropertyRef Name="TimerId" />
+          </Key>
+          <Property Name="TimerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="AreaId" Type="int" />
+          <Property Name="DocumentId" Type="int" />
+          <Property Name="DateStart" Type="datetime" />
+          <Property Name="DateFinish" Type="datetime" />
+          <Property Name="DurationInSeconds" Type="int" />
+        </EntityType>
+        <EntityType Name="TimerArchive">
+          <Key>
+            <PropertyRef Name="TimerArchiveId" />
+          </Key>
+          <Property Name="TimerArchiveId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="AreaId" Type="int" />
+          <Property Name="DocumentId" Type="int" />
+          <Property Name="DateStart" Type="datetime" />
+          <Property Name="DateFinish" Type="datetime" />
+          <Property Name="DurationInSeconds" Type="int" />
+        </EntityType>
+        <EntityType Name="TimerInactivity">
+          <Key>
+            <PropertyRef Name="TimerInactivityId" />
+          </Key>
+          <Property Name="TimerInactivityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="AreaId" Type="int" />
+          <Property Name="DocumentId" Type="int" />
+          <Property Name="DateStart" Type="datetime" />
+          <Property Name="DateFinish" Type="datetime" />
+          <Property Name="DurationInSeconds" Type="int" />
+          <Property Name="StatusId" Type="int" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="350" />
+        </EntityType>
+        <EntityType Name="TimerInactivityArchive">
+          <Key>
+            <PropertyRef Name="TimerInactivityArchiveId" />
+          </Key>
+          <Property Name="TimerInactivityArchiveId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="AreaId" Type="int" />
+          <Property Name="DocumentId" Type="int" />
+          <Property Name="DateStart" Type="datetime" />
+          <Property Name="DateFinish" Type="datetime" />
+          <Property Name="DurationInSeconds" Type="int" />
+          <Property Name="StatusId" Type="int" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="350" />
+        </EntityType>
+        <Association Name="FK_Timer_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+          <End Role="Timer" Type="Self.Timer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="Timer">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Timer_Document">
+          <End Role="Document" Type="Self.Document" Multiplicity="0..1" />
+          <End Role="Timer" Type="Self.Timer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="DocumentId" />
+            </Principal>
+            <Dependent Role="Timer">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimerArchive_Document">
+          <End Role="Document" Type="Self.Document" Multiplicity="0..1" />
+          <End Role="TimerArchive" Type="Self.TimerArchive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="DocumentId" />
+            </Principal>
+            <Dependent Role="TimerArchive">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimerInactivity_Document">
+          <End Role="Document" Type="Self.Document" Multiplicity="0..1" />
+          <End Role="TimerInactivity" Type="Self.TimerInactivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="DocumentId" />
+            </Principal>
+            <Dependent Role="TimerInactivity">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimerInactivityArchive_Document">
+          <End Role="Document" Type="Self.Document" Multiplicity="0..1" />
+          <End Role="TimerInactivityArchive" Type="Self.TimerInactivityArchive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="DocumentId" />
+            </Principal>
+            <Dependent Role="TimerInactivityArchive">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CRCMS_newModelStoreContainer">
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Timer" EntityType="Self.Timer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimerArchive" EntityType="Self.TimerArchive" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimerInactivity" EntityType="Self.TimerInactivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimerInactivityArchive" EntityType="Self.TimerInactivityArchive" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Timer_Area" Association="Self.FK_Timer_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Timer" EntitySet="Timer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Timer_Document" Association="Self.FK_Timer_Document">
+            <End Role="Document" EntitySet="Document" />
+            <End Role="Timer" EntitySet="Timer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimerArchive_Document" Association="Self.FK_TimerArchive_Document">
+            <End Role="Document" EntitySet="Document" />
+            <End Role="TimerArchive" EntitySet="TimerArchive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimerInactivity_Document" Association="Self.FK_TimerInactivity_Document">
+            <End Role="Document" EntitySet="Document" />
+            <End Role="TimerInactivity" EntitySet="TimerInactivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimerInactivityArchive_Document" Association="Self.FK_TimerInactivityArchive_Document">
+            <End Role="Document" EntitySet="Document" />
+            <End Role="TimerInactivityArchive" EntitySet="TimerInactivityArchive" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRCMS_newModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="AreaId" />
+          </Key>
+          <Property Name="AreaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeArea" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="NoSplit" Type="Boolean" />
+          <Property Name="AssemblyArea" Type="Boolean" />
+          <Property Name="FullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="MultipleOrders" Type="Boolean" />
+          <Property Name="HiddenArea" Type="Boolean" />
+          <Property Name="IP" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="PavilionId" Type="Int32" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="OrderExecution" Type="Int32" />
+          <Property Name="Dependence" Type="Int32" />
+          <Property Name="WorkingPeople" Type="Int32" />
+          <Property Name="ComponentTypeId" Type="Int32" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="Segment" Type="Int32" />
+          <NavigationProperty Name="Timers" Relationship="Self.FK_Timer_Area" FromRole="Area" ToRole="Timer" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+          </Key>
+          <Property Name="DocumentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentCreateDate" Type="DateTime" Precision="3" />
+          <Property Name="DocumentCloseDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentTypeId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="ModelId" Type="Int32" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="ProducerId" Type="Int32" />
+          <Property Name="StockId" Type="Int32" />
+          <Property Name="MachinesSN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HoursMachines" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SmcsCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentSN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentDismantlingDate" Type="DateTime" Precision="3" />
+          <Property Name="PartsCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="WorkCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ConsumablesCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ApprovedServiceEngineer" Type="Boolean" />
+          <Property Name="EngineModelId" Type="Int32" />
+          <Property Name="ComponentHours" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RepairTypeId" Type="Int32" />
+          <Property Name="ArrivalMonth" Type="DateTime" Precision="3" />
+          <Property Name="DispatchDate" Type="DateTime" Precision="3" />
+          <Property Name="DeliveryMethodId" Type="Int32" />
+          <Property Name="ToPlan" Type="Boolean" />
+          <Property Name="CabinetSE" Type="Int32" />
+          <Property Name="IsArrived" Type="Boolean" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="StatusId" Type="Int32" />
+          <NavigationProperty Name="Timers" Relationship="Self.FK_Timer_Document" FromRole="Document" ToRole="Timer" />
+          <NavigationProperty Name="TimerArchives" Relationship="CRCMS_newModel.FK_TimerArchive_Document" FromRole="Document" ToRole="TimerArchive" />
+          <NavigationProperty Name="TimerInactivities" Relationship="CRCMS_newModel.FK_TimerInactivity_Document" FromRole="Document" ToRole="TimerInactivity" />
+          <NavigationProperty Name="TimerInactivityArchives" Relationship="CRCMS_newModel.FK_TimerInactivityArchive_Document" FromRole="Document" ToRole="TimerInactivityArchive" />
+        </EntityType>
+        <EntityType Name="Timer">
+          <Key>
+            <PropertyRef Name="TimerId" />
+          </Key>
+          <Property Name="TimerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="AreaId" Type="Int32" />
+          <Property Name="DocumentId" Type="Int32" />
+          <Property Name="DateStart" Type="DateTime" Precision="3" />
+          <Property Name="DateFinish" Type="DateTime" Precision="3" />
+          <Property Name="DurationInSeconds" Type="Int32" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_Timer_Area" FromRole="Timer" ToRole="Area" />
+          <NavigationProperty Name="Document" Relationship="Self.FK_Timer_Document" FromRole="Timer" ToRole="Document" />
+        </EntityType>
+        <EntityType Name="TimerArchive">
+          <Key>
+            <PropertyRef Name="TimerArchiveId" />
+          </Key>
+          <Property Name="TimerArchiveId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="AreaId" Type="Int32" />
+          <Property Name="DocumentId" Type="Int32" />
+          <Property Name="DateStart" Type="DateTime" Precision="3" />
+          <Property Name="DateFinish" Type="DateTime" Precision="3" />
+          <Property Name="DurationInSeconds" Type="Int32" />
+          <NavigationProperty Name="Document" Relationship="CRCMS_newModel.FK_TimerArchive_Document" FromRole="TimerArchive" ToRole="Document" />
+        </EntityType>
+        <EntityType Name="TimerInactivity">
+          <Key>
+            <PropertyRef Name="TimerInactivityId" />
+          </Key>
+          <Property Name="TimerInactivityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="AreaId" Type="Int32" />
+          <Property Name="DocumentId" Type="Int32" />
+          <Property Name="DateStart" Type="DateTime" Precision="3" />
+          <Property Name="DateFinish" Type="DateTime" Precision="3" />
+          <Property Name="DurationInSeconds" Type="Int32" />
+          <Property Name="StatusId" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Document" Relationship="CRCMS_newModel.FK_TimerInactivity_Document" FromRole="TimerInactivity" ToRole="Document" />
+        </EntityType>
+        <EntityType Name="TimerInactivityArchive">
+          <Key>
+            <PropertyRef Name="TimerInactivityArchiveId" />
+          </Key>
+          <Property Name="TimerInactivityArchiveId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="AreaId" Type="Int32" />
+          <Property Name="DocumentId" Type="Int32" />
+          <Property Name="DateStart" Type="DateTime" Precision="3" />
+          <Property Name="DateFinish" Type="DateTime" Precision="3" />
+          <Property Name="DurationInSeconds" Type="Int32" />
+          <Property Name="StatusId" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Document" Relationship="CRCMS_newModel.FK_TimerInactivityArchive_Document" FromRole="TimerInactivityArchive" ToRole="Document" />
+        </EntityType>
+        <Association Name="FK_Timer_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+          <End Role="Timer" Type="Self.Timer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="Timer">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Timer_Document">
+          <End Role="Document" Type="Self.Document" Multiplicity="0..1" />
+          <End Role="Timer" Type="Self.Timer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="DocumentId" />
+            </Principal>
+            <Dependent Role="Timer">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CRCMS_newEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Areas" EntityType="Self.Area" />
+          <EntitySet Name="Documents" EntityType="Self.Document" />
+          <EntitySet Name="Timers" EntityType="Self.Timer" />
+          <EntitySet Name="TimerArchives" EntityType="Self.TimerArchive" />
+          <EntitySet Name="TimerInactivities" EntityType="Self.TimerInactivity" />
+          <EntitySet Name="TimerInactivityArchives" EntityType="Self.TimerInactivityArchive" />
+          <AssociationSet Name="FK_Timer_Area" Association="Self.FK_Timer_Area">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="Timer" EntitySet="Timers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Timer_Document" Association="Self.FK_Timer_Document">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="Timer" EntitySet="Timers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimerArchive_Document" Association="CRCMS_newModel.FK_TimerArchive_Document">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="TimerArchive" EntitySet="TimerArchives" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimerInactivity_Document" Association="CRCMS_newModel.FK_TimerInactivity_Document">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="TimerInactivity" EntitySet="TimerInactivities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimerInactivityArchive_Document" Association="CRCMS_newModel.FK_TimerInactivityArchive_Document">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="TimerInactivityArchive" EntitySet="TimerInactivityArchives" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_TimerArchive_Document">
+          <End Type="CRCMS_newModel.Document" Role="Document" Multiplicity="0..1" />
+          <End Type="CRCMS_newModel.TimerArchive" Role="TimerArchive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="DocumentId" />
+            </Principal>
+            <Dependent Role="TimerArchive">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimerInactivity_Document">
+          <End Type="CRCMS_newModel.Document" Role="Document" Multiplicity="0..1" />
+          <End Type="CRCMS_newModel.TimerInactivity" Role="TimerInactivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="DocumentId" />
+            </Principal>
+            <Dependent Role="TimerInactivity">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimerInactivityArchive_Document">
+          <End Type="CRCMS_newModel.Document" Role="Document" Multiplicity="0..1" />
+          <End Type="CRCMS_newModel.TimerInactivityArchive" Role="TimerInactivityArchive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="DocumentId" />
+            </Principal>
+            <Dependent Role="TimerInactivityArchive">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRCMS_newModelStoreContainer" CdmEntityContainer="CRCMS_newEntities1">
+          <EntitySetMapping Name="Areas">
+            <EntityTypeMapping TypeName="CRCMS_newModel.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="TypeArea" ColumnName="TypeArea" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="NoSplit" ColumnName="NoSplit" />
+                <ScalarProperty Name="AssemblyArea" ColumnName="AssemblyArea" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="MultipleOrders" ColumnName="MultipleOrders" />
+                <ScalarProperty Name="HiddenArea" ColumnName="HiddenArea" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="PavilionId" ColumnName="PavilionId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="OrderExecution" ColumnName="OrderExecution" />
+                <ScalarProperty Name="Dependence" ColumnName="Dependence" />
+                <ScalarProperty Name="WorkingPeople" ColumnName="WorkingPeople" />
+                <ScalarProperty Name="ComponentTypeId" ColumnName="ComponentTypeId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Segment" ColumnName="Segment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="CRCMS_newModel.Document">
+              <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="DocumentNumber" ColumnName="DocumentNumber" />
+                <ScalarProperty Name="DocumentCreateDate" ColumnName="DocumentCreateDate" />
+                <ScalarProperty Name="DocumentCloseDate" ColumnName="DocumentCloseDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DocumentTypeId" ColumnName="DocumentTypeId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="ProducerId" ColumnName="ProducerId" />
+                <ScalarProperty Name="StockId" ColumnName="StockId" />
+                <ScalarProperty Name="MachinesSN" ColumnName="MachinesSN" />
+                <ScalarProperty Name="HoursMachines" ColumnName="HoursMachines" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SmcsCode" ColumnName="SmcsCode" />
+                <ScalarProperty Name="ComponentSN" ColumnName="ComponentSN" />
+                <ScalarProperty Name="ComponentDismantlingDate" ColumnName="ComponentDismantlingDate" />
+                <ScalarProperty Name="PartsCost" ColumnName="PartsCost" />
+                <ScalarProperty Name="WorkCost" ColumnName="WorkCost" />
+                <ScalarProperty Name="ConsumablesCost" ColumnName="ConsumablesCost" />
+                <ScalarProperty Name="ApprovedServiceEngineer" ColumnName="ApprovedServiceEngineer" />
+                <ScalarProperty Name="EngineModelId" ColumnName="EngineModelId" />
+                <ScalarProperty Name="ComponentHours" ColumnName="ComponentHours" />
+                <ScalarProperty Name="RepairTypeId" ColumnName="RepairTypeId" />
+                <ScalarProperty Name="ArrivalMonth" ColumnName="ArrivalMonth" />
+                <ScalarProperty Name="DispatchDate" ColumnName="DispatchDate" />
+                <ScalarProperty Name="DeliveryMethodId" ColumnName="DeliveryMethodId" />
+                <ScalarProperty Name="ToPlan" ColumnName="ToPlan" />
+                <ScalarProperty Name="CabinetSE" ColumnName="CabinetSE" />
+                <ScalarProperty Name="IsArrived" ColumnName="IsArrived" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Timers">
+            <EntityTypeMapping TypeName="CRCMS_newModel.Timer">
+              <MappingFragment StoreEntitySet="Timer">
+                <ScalarProperty Name="TimerId" ColumnName="TimerId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="DateFinish" ColumnName="DateFinish" />
+                <ScalarProperty Name="DurationInSeconds" ColumnName="DurationInSeconds" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimerArchives">
+            <EntityTypeMapping TypeName="CRCMS_newModel.TimerArchive">
+              <MappingFragment StoreEntitySet="TimerArchive">
+                <ScalarProperty Name="TimerArchiveId" ColumnName="TimerArchiveId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="DateFinish" ColumnName="DateFinish" />
+                <ScalarProperty Name="DurationInSeconds" ColumnName="DurationInSeconds" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimerInactivities">
+            <EntityTypeMapping TypeName="CRCMS_newModel.TimerInactivity">
+              <MappingFragment StoreEntitySet="TimerInactivity">
+                <ScalarProperty Name="TimerInactivityId" ColumnName="TimerInactivityId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="DateFinish" ColumnName="DateFinish" />
+                <ScalarProperty Name="DurationInSeconds" ColumnName="DurationInSeconds" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimerInactivityArchives">
+            <EntityTypeMapping TypeName="CRCMS_newModel.TimerInactivityArchive">
+              <MappingFragment StoreEntitySet="TimerInactivityArchive">
+                <ScalarProperty Name="TimerInactivityArchiveId" ColumnName="TimerInactivityArchiveId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="DateFinish" ColumnName="DateFinish" />
+                <ScalarProperty Name="DurationInSeconds" ColumnName="DurationInSeconds" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
